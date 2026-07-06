@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "framework": "nextjs",
-  "rootDirectory": "apps/web",
-  "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@portfolio/web...",
-  "outputDirectory": ".next"
+  "installCommand": "npm install -g pnpm@10.33.2 && pnpm install",
+  "buildCommand": "pnpm turbo run build --filter=@portfolio/web...",
+  "outputDirectory": "apps/web/.next",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- apps/web packages"
 }
