@@ -1,9 +1,4 @@
-import { loadEnvConfig } from "@next/env";
-import path from "node:path";
 import type { NextConfig } from "next";
-
-// Load monorepo root .env
-loadEnvConfig(path.resolve(process.cwd(), "../../"));
 
 const supabaseHost = (() => {
   try {
