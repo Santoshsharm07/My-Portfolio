@@ -26,22 +26,17 @@ export async function apiFetch<T>(
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
 
-  let res: Response;
-  try {
-    res = await fetch(`${API_URL}${path}`, {
-      method,
-      signal: controller.signal,
-      headers: {
-        "content-type": "application/json",
-        ...(cookie ? { cookie } : {}),
-      },
-      body: body ? JSON.stringify(body) : undefined,
-      next: tags || revalidate !== undefined ? { tags, revalidate } : undefined,
-      cache: revalidate === undefined && !tags ? "no-store" : undefined,
-    });
-  } finally {
-    clearTimeout(timer);
-  }
+  const res = await fetch(`${API_URL}${path}`, {
+    method,
+    signal: controller.signal,
+    headers: {
+      "content-type": "application/json",
+      ...(cookie ? { cookie } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+    next: tags || revalidate !== undefined ? { tags, revalidate } : undefined,
+    cache: revalidate === undefined && !tags ? "no-store" : undefined,
+  }).finally(() => clearTimeout(timer));
 
   if (!res.ok) {
     const detail = await res.text().catch(() => "");
