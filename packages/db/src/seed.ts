@@ -11,20 +11,20 @@ async function main() {
 
     await sql`truncate
       case_studies, projects, experience, skills, certifications,
-      testimonials, seo_meta, hero, about, site_settings, resume
+      testimonials, freelance_services, seo_meta, hero, about,
+      site_settings, resume
       restart identity cascade`;
 
     await sql`insert into site_settings ${sql({
-      brand_name: "Aria Vale",
-      tagline: "Design engineer crafting cinematic web experiences",
-      email: "hello@ariavale.dev",
-      location: "Berlin, DE",
-      availability: "Available for select projects — Q3 2026",
-      socials: JSON.stringify([
-        { label: "GitHub", url: "https://github.com/" },
-        { label: "LinkedIn", url: "https://linkedin.com/" },
-        { label: "Dribbble", url: "https://dribbble.com/" },
-        { label: "X", url: "https://x.com/" },
+      brand_name: "Santosh Sharma",
+      tagline: "Software Engineer",
+      email: "07santoshdevlopersharma@gmail.com",
+      location: "India",
+      availability: "Available for freelance projects",
+      socials: sql.json([
+        { label: "GitHub", url: "https://github.com/Santoshsharm07" },
+        { label: "LinkedIn", url: "https://www.linkedin.com/in/santosh-sharma-a57026220/" },
+        { label: "LeetCode", url: "https://leetcode.com/u/santosh_07sharma/" },
       ]),
     })}`;
 
@@ -32,7 +32,7 @@ async function main() {
       headline: "I build worlds that respond to you.",
       subheadline:
         "Design engineer blending 3D, motion, and systems thinking into interfaces people remember.",
-      roles: JSON.stringify([
+      roles: sql.json([
         "Design Engineer",
         "Creative Technologist",
         "3D & Motion",
@@ -47,7 +47,7 @@ async function main() {
     await sql`insert into about ${sql({
       heading: "Obsessed with the space between design and engineering.",
       body: "I spend my days turning ambitious ideas into interfaces that feel inevitable — where a scroll becomes a story and a hover becomes a moment. Ten years across startups and studios, shipping work that has been featured on Awwwards and used by millions.\n\nMy toolkit lives at the intersection of **React**, **WebGL/Three.js**, and a deep respect for craft.",
-      stats: JSON.stringify([
+      stats: sql.json([
         { label: "Years", value: "10+" },
         { label: "Projects shipped", value: "120+" },
         { label: "Awwwards", value: "7" },
@@ -96,8 +96,11 @@ async function main() {
       {
         title: "Aurora — Generative Brand System",
         slug: "aurora",
+        kind: "work",
         summary:
           "A living identity that renders itself in real time with WebGL shaders.",
+        about:
+          "Built for a client rebrand: a shader-driven system that generates infinite on-brand visuals in the browser, cutting design turnaround from days to seconds.",
         tags: ["WebGL", "Three.js", "GSAP", "Design System"],
         role: "Design Engineer",
         year: 2025,
@@ -110,8 +113,11 @@ async function main() {
       {
         title: "Monolith — Product Launch",
         slug: "monolith",
+        kind: "work",
         summary:
           "Scroll-driven cinematic launch experience with a physics-based hero.",
+        about:
+          "A launch microsite delivered end-to-end for a startup: staged reveal, pinned scroll scenes, and a physics hero that tripled launch-day traffic.",
         tags: ["Next.js", "R3F", "Lenis", "Framer Motion"],
         role: "Lead Engineer",
         year: 2024,
@@ -124,8 +130,11 @@ async function main() {
       {
         title: "Cadence — Music Visualizer",
         slug: "cadence",
+        kind: "personal",
         summary:
           "Audio-reactive 3D visuals that turn any track into a landscape.",
+        about:
+          "A weekend passion project exploring the Web Audio API and GLSL — every track becomes a living, reactive 3D landscape you can fly through.",
         tags: ["Web Audio", "GLSL", "Three.js"],
         role: "Creative Developer",
         year: 2024,
@@ -138,7 +147,10 @@ async function main() {
       {
         title: "Atlas — Data Storytelling",
         slug: "atlas",
+        kind: "personal",
         summary: "An interactive report that makes complex data feel human.",
+        about:
+          "A self-initiated experiment in data storytelling — turning a dry dataset into an interactive, scroll-driven narrative built with D3 and SVG.",
         tags: ["D3", "SVG", "Motion"],
         role: "Engineer",
         year: 2023,
@@ -167,8 +179,8 @@ async function main() {
           "We built a generative system: a set of shader-driven primitives that compose into infinite, on-brand compositions.",
         results:
           "40% lift in engagement, featured on Awwwards, and a design language the team can extend forever.",
-        gallery: JSON.stringify([]),
-        sections: JSON.stringify([
+        gallery: sql.json([]),
+        sections: sql.json([
           { type: "text", heading: "The brief", body: "Make it unforgettable." },
           { type: "metric", heading: "Engagement", value: "+40%" },
         ]),
@@ -242,6 +254,46 @@ async function main() {
       },
     ];
     for (const t of testimonials) await sql`insert into testimonials ${sql(t)}`;
+
+    const freelance = [
+      {
+        title: "Landing Page / Portfolio",
+        description:
+          "A fast, polished one-page site to launch your idea, product, or personal brand — responsive and SEO-ready.",
+        price: "From ₹4,999",
+        timeline: "3–5 days",
+        features: ["Responsive design", "SEO basics", "Contact form", "1 revision round"],
+        icon: "🚀",
+        cta_label: "Build my page",
+        contact_url: "#contact",
+        sort_order: 0,
+      },
+      {
+        title: "Full-Stack Web App",
+        description:
+          "End-to-end web application with authentication, database, and an admin dashboard — built to scale with your business.",
+        price: "From ₹19,999",
+        timeline: "2–4 weeks",
+        features: ["Custom features", "Database + API", "Admin panel", "Deployment"],
+        icon: "⚙️",
+        cta_label: "Discuss my project",
+        contact_url: "#contact",
+        sort_order: 1,
+      },
+      {
+        title: "Bug Fixes & Improvements",
+        description:
+          "Have an existing site or app that needs fixing, speeding up, or new features? I'll jump in at minimal cost.",
+        price: "From ₹999",
+        timeline: "1–2 days",
+        features: ["Bug fixes", "Performance tuning", "Small features", "Code review"],
+        icon: "🔧",
+        cta_label: "Get help now",
+        contact_url: "#contact",
+        sort_order: 2,
+      },
+    ];
+    for (const f of freelance) await sql`insert into freelance_services ${sql(f)}`;
 
     const seo = [
       {

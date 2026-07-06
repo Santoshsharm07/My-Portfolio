@@ -8,10 +8,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       <div className="container-lux flex flex-col items-center justify-between gap-6 md:flex-row">
         <div className="flex items-center gap-2 font-display text-lg font-medium text-ink-100">
           <span className="h-2 w-2 bg-accent-500" />
-          {brand}
+          Santosh Sharma
         </div>
         <p className="font-mono text-xs uppercase tracking-widest text-ink-500">
-          © {year} {brand} — Crafted with intent.
+          © {year} Santosh Sharma — Portfolio
         </p>
         <div className="flex gap-5 font-mono text-xs uppercase tracking-widest text-ink-500">
           {(settings?.socials ?? []).map((s) => (

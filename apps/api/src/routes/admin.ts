@@ -12,6 +12,8 @@ import {
   certificationUpdate,
   testimonialCreate,
   testimonialUpdate,
+  freelanceServiceCreate,
+  freelanceServiceUpdate,
   seoMetaUpsert,
 } from "@portfolio/types";
 import { heroRouter, aboutRouter, siteSettingsRouter } from "./singletons.js";
@@ -77,6 +79,16 @@ adminRouter.use(
     createSchema: testimonialCreate,
     updateSchema: testimonialUpdate,
     revalidateTags: ["testimonials", "home"],
+    reorderable: true,
+  }),
+);
+adminRouter.use(
+  "/freelance",
+  crudRouter({
+    table: "freelance_services",
+    createSchema: freelanceServiceCreate,
+    updateSchema: freelanceServiceUpdate,
+    revalidateTags: ["freelance", "home"],
     reorderable: true,
   }),
 );

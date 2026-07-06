@@ -8,6 +8,7 @@ import type {
   Skill,
   Certification,
   Testimonial,
+  FreelanceService,
   Resume,
   CaseStudy,
   SeoMeta,
@@ -22,13 +23,21 @@ export interface HomeContent {
   skills: Skill[];
   certifications: Certification[];
   testimonials: Testimonial[];
+  freelance: FreelanceService[];
   resume: Resume | null;
 }
 
 /** All content for the one-page site, cached and tag-revalidated. */
 export function getHomeContent(): Promise<HomeContent> {
   return apiFetch<HomeContent>("/content/home", {
-    tags: ["home", "projects", "skills", "experience", "testimonials"],
+    tags: [
+      "home",
+      "projects",
+      "skills",
+      "experience",
+      "testimonials",
+      "freelance",
+    ],
     revalidate: 3600,
   });
 }

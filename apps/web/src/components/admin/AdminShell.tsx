@@ -14,6 +14,7 @@ const nav = [
   { label: "Experience", href: "/admin/experience" },
   { label: "Skills", href: "/admin/skills" },
   { label: "Certifications", href: "/admin/certifications" },
+  { label: "Freelancing", href: "/admin/freelancing" },
   { label: "Testimonials", href: "/admin/testimonials" },
   { label: "Résumé", href: "/admin/resume" },
   { label: "Media", href: "/admin/media" },

@@ -7,6 +7,7 @@ import type {
   Skill,
   Certification,
   Testimonial,
+  FreelanceService,
   Resume,
   CaseStudy,
   SeoMeta,
@@ -30,16 +31,15 @@ const base = (n: string) => ({
 
 export const demoSettings: SiteSettings = {
   ...base("s1"),
-  brand_name: "Aria Vale",
-  tagline: "Design engineer crafting cinematic web experiences",
-  email: "hello@ariavale.dev",
-  location: "Berlin, DE",
-  availability: "Available for select projects — Q3 2026",
+  brand_name: "Santosh Sharma",
+  tagline: "Software Engineer",
+  email: "07santoshdevlopersharma@gmail.com",
+  location: "India",
+  availability: "Available for freelance projects",
   socials: [
-    { label: "GitHub", url: "https://github.com/" },
-    { label: "LinkedIn", url: "https://linkedin.com/" },
-    { label: "Dribbble", url: "https://dribbble.com/" },
-    { label: "X", url: "https://x.com/" },
+    { label: "GitHub", url: "https://github.com/Santoshsharm07" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/santosh-sharma-a57026220/" },
+    { label: "LeetCode", url: "https://leetcode.com/u/santosh_07sharma/" },
   ],
   theme: "acid-brutalist",
 };
@@ -122,8 +122,11 @@ export const demoProjects: Project[] = [
     ...base("p1"),
     title: "Aurora — Generative Brand System",
     slug: "aurora",
+    kind: "work",
     summary:
       "A living identity that renders itself in real time with WebGL shaders.",
+    about:
+      "Built for a client rebrand: a shader-driven system that generates infinite on-brand visuals in the browser, cutting design turnaround from days to seconds.",
     cover_media_id: null,
     tags: ["WebGL", "Three.js", "GSAP", "Design System"],
     role: "Design Engineer",
@@ -138,8 +141,11 @@ export const demoProjects: Project[] = [
     ...base("p2"),
     title: "Monolith — Product Launch",
     slug: "monolith",
+    kind: "work",
     summary:
       "Scroll-driven cinematic launch experience with a physics-based hero.",
+    about:
+      "A launch microsite delivered end-to-end for a startup: staged reveal, pinned scroll scenes, and a physics hero that tripled launch-day traffic.",
     cover_media_id: null,
     tags: ["Next.js", "R3F", "Lenis", "Framer Motion"],
     role: "Lead Engineer",
@@ -154,7 +160,10 @@ export const demoProjects: Project[] = [
     ...base("p3"),
     title: "Cadence — Music Visualizer",
     slug: "cadence",
+    kind: "personal",
     summary: "Audio-reactive 3D visuals that turn any track into a landscape.",
+    about:
+      "A weekend passion project exploring the Web Audio API and GLSL — every track becomes a living, reactive 3D landscape you can fly through.",
     cover_media_id: null,
     tags: ["Web Audio", "GLSL", "Three.js"],
     role: "Creative Developer",
@@ -169,7 +178,10 @@ export const demoProjects: Project[] = [
     ...base("p4"),
     title: "Atlas — Data Storytelling",
     slug: "atlas",
+    kind: "personal",
     summary: "An interactive report that makes complex data feel human.",
+    about:
+      "A self-initiated experiment in data storytelling — turning a dry dataset into an interactive, scroll-driven narrative built with D3 and SVG.",
     cover_media_id: null,
     tags: ["D3", "SVG", "Motion"],
     role: "Engineer",
@@ -291,6 +303,51 @@ export const demoTestimonials: Testimonial[] = [
   },
 ];
 
+export const demoFreelance: FreelanceService[] = [
+  {
+    ...base("f1"),
+    title: "Landing Page / Portfolio",
+    description:
+      "A fast, polished one-page site to launch your idea, product, or personal brand — responsive and SEO-ready.",
+    price: "From ₹4,999",
+    timeline: "3–5 days",
+    features: ["Responsive design", "SEO basics", "Contact form", "1 revision round"],
+    icon: "🚀",
+    cta_label: "Build my page",
+    contact_url: "#contact",
+    is_published: true,
+    sort_order: 0,
+  },
+  {
+    ...base("f2"),
+    title: "Full-Stack Web App",
+    description:
+      "End-to-end web application with authentication, database, and an admin dashboard — built to scale with your business.",
+    price: "From ₹19,999",
+    timeline: "2–4 weeks",
+    features: ["Custom features", "Database + API", "Admin panel", "Deployment"],
+    icon: "⚙️",
+    cta_label: "Discuss my project",
+    contact_url: "#contact",
+    is_published: true,
+    sort_order: 1,
+  },
+  {
+    ...base("f3"),
+    title: "Bug Fixes & Improvements",
+    description:
+      "Have an existing site or app that needs fixing, speeding up, or new features? I'll jump in at minimal cost.",
+    price: "From ₹999",
+    timeline: "1–2 days",
+    features: ["Bug fixes", "Performance tuning", "Small features", "Code review"],
+    icon: "🔧",
+    cta_label: "Get help now",
+    contact_url: "#contact",
+    is_published: true,
+    sort_order: 2,
+  },
+];
+
 export const demoResume: Resume = {
   ...base("r1"),
   label: "Aria Vale — Résumé 2026",
@@ -322,6 +379,7 @@ export interface DemoHome {
   skills: Skill[];
   certifications: Certification[];
   testimonials: Testimonial[];
+  freelance: FreelanceService[];
   resume: Resume;
 }
 
@@ -334,6 +392,7 @@ export const demoHome: DemoHome = {
   skills: demoSkills,
   certifications: demoCertifications,
   testimonials: demoTestimonials,
+  freelance: demoFreelance,
   resume: demoResume,
 };
 

@@ -1,10 +1,12 @@
 import type { ResourceConfig } from "./ResourceManager";
+import type { FieldConfig } from "./fields";
 import type {
   Project,
   Skill,
   Experience,
   Certification,
   Testimonial,
+  FreelanceService,
   SeoMeta,
 } from "@portfolio/types";
 
@@ -15,6 +17,7 @@ export const projectConfig: ResourceConfig<Project & { id: string }> = {
   description: "Case studies and selected work shown on the site.",
   columns: [
     { key: "title", label: "Title" },
+    { key: "kind", label: "Kind" },
     { key: "year", label: "Year" },
     { key: "is_published", label: "Published" },
     { key: "is_featured", label: "Featured" },
@@ -28,13 +31,36 @@ export const projectConfig: ResourceConfig<Project & { id: string }> = {
       required: true,
       help: "url-safe, e.g. aurora",
     },
+    {
+      name: "kind",
+      label: "Kind",
+      type: "select",
+      options: [
+        { label: "Real Work Project", value: "work" },
+        { label: "Personal Project", value: "personal" },
+      ],
+      help: "Which tab it appears under on the site",
+    },
     { name: "year", label: "Year", type: "number" },
-    { name: "summary", label: "Summary", type: "textarea", colSpan: 2 },
+    {
+      name: "summary",
+      label: "Summary (card)",
+      type: "textarea",
+      colSpan: 2,
+      help: "Short line shown on the project card",
+    },
+    {
+      name: "about",
+      label: "About (detail page)",
+      type: "textarea",
+      colSpan: 2,
+      help: "Longer description shown when the project is opened",
+    },
     { name: "cover_media_id", label: "Cover image", type: "media", colSpan: 2 },
     { name: "tags", label: "Tags", type: "tags", colSpan: 2 },
     { name: "role", label: "Role", type: "text" },
     { name: "live_url", label: "Live URL", type: "url" },
-    { name: "repo_url", label: "Repo URL", type: "url" },
+    { name: "repo_url", label: "GitHub / Repo URL", type: "url" },
     { name: "is_featured", label: "Featured", type: "boolean" },
     { name: "is_published", label: "Published", type: "boolean" },
     { name: "sort_order", label: "Sort order", type: "number" },
@@ -42,7 +68,9 @@ export const projectConfig: ResourceConfig<Project & { id: string }> = {
   defaults: {
     title: "",
     slug: "",
+    kind: "work",
     summary: "",
+    about: "",
     tags: [],
     role: "",
     is_featured: false,
@@ -174,6 +202,125 @@ export const testimonialConfig: ResourceConfig<Testimonial & { id: string }> = {
     is_published: true,
     sort_order: 0,
   } as Partial<Testimonial & { id: string }>,
+};
+
+export const freelanceConfig: ResourceConfig<FreelanceService & { id: string }> =
+  {
+    path: "freelance",
+    title: "Freelancing",
+    singular: "Service",
+    description:
+      "Freelance offerings shown in the public Freelancing section.",
+    columns: [
+      { key: "title", label: "Service" },
+      { key: "price", label: "Price" },
+      { key: "timeline", label: "Timeline" },
+      { key: "is_published", label: "Published" },
+    ],
+    fields: [
+      { name: "title", label: "Service title", type: "text", required: true, colSpan: 2 },
+      { name: "icon", label: "Icon (emoji)", type: "text", help: "e.g. 🚀" },
+      { name: "price", label: "Price", type: "text", help: "e.g. From ₹4,999" },
+      { name: "timeline", label: "Timeline", type: "text", help: "e.g. 3–5 days" },
+      { name: "description", label: "Description / purpose", type: "textarea", colSpan: 2 },
+      { name: "features", label: "Features", type: "tags", colSpan: 2, help: "comma separated" },
+      { name: "cta_label", label: "Button label", type: "text" },
+      {
+        name: "contact_url",
+        label: "Button link",
+        type: "text",
+        help: "#contact, mailto:you@mail.com, or https://wa.me/…",
+      },
+      { name: "is_published", label: "Published", type: "boolean" },
+      { name: "sort_order", label: "Sort order", type: "number" },
+    ],
+    defaults: {
+      title: "",
+      icon: "",
+      price: "",
+      timeline: "",
+      description: "",
+      features: [],
+      cta_label: "Start this project",
+      contact_url: "#contact",
+      is_published: true,
+      sort_order: 0,
+    } as Partial<FreelanceService & { id: string }>,
+  };
+
+/* ── Singleton editors (hero / about / site settings) ───────────────────── */
+export interface SingletonConfig {
+  path: string;
+  title: string;
+  description?: string;
+  fields: FieldConfig[];
+  defaults: Record<string, unknown>;
+}
+
+export const heroConfig: SingletonConfig = {
+  path: "hero",
+  title: "Hero",
+  description: "The headline area at the top of your site.",
+  fields: [
+    { name: "headline", label: "Headline", type: "textarea", required: true, colSpan: 2 },
+    { name: "subheadline", label: "Subheadline", type: "textarea", colSpan: 2 },
+    { name: "roles", label: "Rotating roles", type: "tags", colSpan: 2, help: "comma separated" },
+    { name: "cta_label", label: "Primary button label", type: "text" },
+    { name: "cta_href", label: "Primary button link", type: "text" },
+    { name: "secondary_cta_label", label: "Secondary button label", type: "text" },
+    { name: "secondary_cta_href", label: "Secondary button link", type: "text" },
+    { name: "background_media_id", label: "Background media", type: "media", colSpan: 2 },
+  ],
+  defaults: {
+    headline: "",
+    subheadline: "",
+    roles: [],
+    cta_label: "View work",
+    cta_href: "#projects",
+    secondary_cta_label: "",
+    secondary_cta_href: "",
+    background_media_id: null,
+  },
+};
+
+export const aboutConfig: SingletonConfig = {
+  path: "about",
+  title: "About",
+  description: "Your about section.",
+  fields: [
+    { name: "heading", label: "Heading", type: "textarea", required: true, colSpan: 2 },
+    { name: "body", label: "Body (markdown)", type: "richtext", colSpan: 2 },
+    { name: "portrait_media_id", label: "Portrait", type: "media", colSpan: 2 },
+    { name: "stats", label: "Stats", type: "json", colSpan: 2, help: '[{"label":"Years","value":"5+"}]' },
+  ],
+  defaults: {
+    heading: "",
+    body: "",
+    portrait_media_id: null,
+    stats: [],
+  },
+};
+
+export const settingsConfig: SingletonConfig = {
+  path: "site-settings",
+  title: "Site Settings",
+  description: "Brand, contact, and social links.",
+  fields: [
+    { name: "brand_name", label: "Brand name", type: "text", required: true },
+    { name: "tagline", label: "Tagline", type: "text" },
+    { name: "email", label: "Contact email", type: "text" },
+    { name: "location", label: "Location", type: "text" },
+    { name: "availability", label: "Availability", type: "text", colSpan: 2 },
+    { name: "socials", label: "Social links", type: "json", colSpan: 2, help: '[{"label":"GitHub","url":"https://…"}]' },
+  ],
+  defaults: {
+    brand_name: "",
+    tagline: "",
+    email: "",
+    location: "",
+    availability: "",
+    socials: [],
+  },
 };
 
 export const seoConfig: ResourceConfig<SeoMeta & { id: string }> = {

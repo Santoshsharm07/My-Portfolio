@@ -72,7 +72,7 @@ export function Hero({
         <SplitText
           as="h1"
           text={headline}
-          className="max-w-5xl text-4xl font-light leading-[0.95] text-ink-50 md:text-5xl"
+          className="max-w-5xl text-4xl font-bold leading-[0.95] text-ink-50 md:text-5xl"
         />
 
         <motion.p

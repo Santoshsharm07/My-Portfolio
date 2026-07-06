@@ -1,5 +1,5 @@
 /**
- * Design tokens — single source of truth for the premium dark-luxury system.
+ * Design tokens — single source of truth for the Acid Brutalist system.
  * Consumed by the Tailwind preset and available at runtime for JS/canvas/3D.
  */
 

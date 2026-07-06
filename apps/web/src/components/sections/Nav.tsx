@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils";
 const links = [
   { label: "Work", href: "#projects" },
   { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
+  { label: "Freelance", href: "#freelancing" },
   { label: "Contact", href: "#contact" },
+  { label: "Resume", href: "#resume" },
 ];
 
 export function Nav({ brand }: { brand: string }) {
@@ -28,7 +29,7 @@ export function Nav({ brand }: { brand: string }) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-base-700/50 bg-base-950/70 backdrop-blur-xl"
+          ? "border-b border-base-700 bg-base-950"
           : "border-b border-transparent",
       )}
     >
@@ -39,7 +40,7 @@ export function Nav({ brand }: { brand: string }) {
           className="flex items-center gap-2.5 font-display text-lg font-medium tracking-tight text-ink-50"
         >
           <span className="h-2.5 w-2.5 bg-accent-500" />
-          {brand}
+          Santosh Sharma
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
@@ -80,7 +81,7 @@ export function Nav({ brand }: { brand: string }) {
       </nav>
 
       {open && (
-        <div className="border-t border-base-700/50 bg-base-950/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-base-700 bg-base-950 md:hidden">
           <ul className="container-lux flex flex-col py-6">
             {links.map((l) => (
               <li key={l.href}>

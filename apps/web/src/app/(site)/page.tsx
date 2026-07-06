@@ -7,7 +7,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Certifications } from "@/components/sections/Certifications";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { Freelancing } from "@/components/sections/Freelancing";
 import { ResumeBand } from "@/components/sections/ResumeBand";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
@@ -23,6 +23,7 @@ const EMPTY: HomeContent = {
   skills: [],
   certifications: [],
   testimonials: [],
+  freelance: [],
   resume: null,
 };
 
@@ -39,7 +40,7 @@ export default async function HomePage() {
       <Projects projects={content.projects} />
       <Skills skills={content.skills} />
       <Certifications items={content.certifications} />
-      <Testimonials items={content.testimonials} />
+      <Freelancing services={content.freelance} settings={content.settings} />
       <ResumeBand resume={content.resume} />
       <Contact settings={content.settings} />
       <Footer settings={content.settings} />

@@ -34,6 +34,7 @@ publicRouter.get(
       skills,
       certifications,
       testimonials,
+      freelance,
       resume,
     ] = await Promise.all([
       supabase.from("site_settings").select("*").limit(1).maybeSingle(),
@@ -52,6 +53,11 @@ publicRouter.get(
         .select("*")
         .eq("is_published", true)
         .order("sort_order"),
+      supabase
+        .from("freelance_services")
+        .select("*")
+        .eq("is_published", true)
+        .order("sort_order"),
       supabase.from("resume").select("*").eq("is_active", true).maybeSingle(),
     ]);
 
@@ -65,6 +71,7 @@ publicRouter.get(
         skills: skills.data ?? [],
         certifications: certifications.data ?? [],
         testimonials: testimonials.data ?? [],
+        freelance: freelance.data ?? [],
         resume: resume.data,
       },
     });

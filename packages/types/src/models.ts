@@ -91,6 +91,8 @@ export const project = baseEntity.extend({
     .min(1)
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "must be a url-safe slug"),
   summary: z.string().default(""),
+  about: z.string().default(""), // longer "short about" shown on the detail page
+  kind: z.enum(["personal", "work"]).default("personal"),
   cover_media_id: uuid.nullable(),
   tags: z.array(z.string()).default([]),
   role: z.string().default(""),
@@ -200,6 +202,27 @@ export const testimonialCreate = testimonial.omit({
 });
 export const testimonialUpdate = testimonialCreate.partial();
 export type Testimonial = z.infer<typeof testimonial>;
+
+/* ─────────────────────── Freelance services ────────────────── */
+export const freelanceService = baseEntity.extend({
+  title: z.string().min(1),
+  description: z.string().default(""), // purpose / what it's for
+  price: z.string().default(""), // e.g. "From ₹4,999" — the minimal-cost angle
+  timeline: z.string().default(""), // e.g. "3–5 days"
+  features: z.array(z.string()).default([]),
+  icon: z.string().default(""), // emoji or short glyph
+  cta_label: z.string().default("Start this project"),
+  contact_url: z.string().nullable(), // mailto:, wa.me, tel:, or #contact
+  is_published: z.boolean().default(true),
+  sort_order: z.number().int().default(0),
+});
+export const freelanceServiceCreate = freelanceService.omit({
+  id: true,
+  created_at: true,
+  updated_at: true,
+});
+export const freelanceServiceUpdate = freelanceServiceCreate.partial();
+export type FreelanceService = z.infer<typeof freelanceService>;
 
 /* ──────────────────── Contact messages ─────────────────────── */
 export const contactMessage = baseEntity.extend({

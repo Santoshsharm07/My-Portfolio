@@ -11,6 +11,7 @@ const cards = [
   { path: "skills", label: "Skills", href: "/admin/skills" },
   { path: "experience", label: "Experience", href: "/admin/experience" },
   { path: "certifications", label: "Certifications", href: "/admin/certifications" },
+  { path: "freelance", label: "Freelancing", href: "/admin/freelancing" },
   { path: "testimonials", label: "Testimonials", href: "/admin/testimonials" },
 ];
 

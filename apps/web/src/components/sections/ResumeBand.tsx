@@ -9,7 +9,7 @@ export function ResumeBand({ resume }: { resume: Resume | null }) {
   const href = resume?.file_media_id ? "/resume" : "#contact";
 
   return (
-    <section className="relative py-24">
+    <section id="resume" className="relative py-24">
       <div className="container-lux">
         <Reveal>
           <div className="relative flex flex-col items-start justify-between gap-8 overflow-hidden bg-accent-500 p-10 text-base-950 md:flex-row md:items-center md:p-14">
@@ -21,7 +21,7 @@ export function ResumeBand({ resume }: { resume: Resume | null }) {
                 Résumé
               </span>
               <h2 className="mt-4 max-w-xl text-2xl font-medium leading-[1.05] text-base-950 md:text-4xl">
-                {resume?.label ?? "Want the full story on paper?"}
+                Santosh — Résumé 2026
               </h2>
             </div>
             <a

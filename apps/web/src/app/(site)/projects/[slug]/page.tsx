@@ -41,6 +41,10 @@ export default async function ProjectPage({
   const { project, caseStudy } = data;
 
   const blocks: { label: string; value: string }[] = [
+    // Show the "short about" as its own block when a case study also exists.
+    project.about && caseStudy?.overview
+      ? { label: "About this project", value: project.about }
+      : null,
     caseStudy?.problem ? { label: "Problem", value: caseStudy.problem } : null,
     caseStudy?.solution
       ? { label: "Solution", value: caseStudy.solution }
@@ -60,11 +64,14 @@ export default async function ProjectPage({
         </Link>
 
         <header className="mt-10 max-w-4xl">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="border border-accent-500 bg-accent-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-accent-300">
+              {project.kind === "work" ? "Real Work" : "Personal Project"}
+            </span>
             {project.tags.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-base-700 px-3 py-1 text-xs text-ink-400"
+                className="rounded-none border border-base-700 px-3 py-1 text-xs text-ink-400"
               >
                 {t}
               </span>
@@ -73,10 +80,10 @@ export default async function ProjectPage({
           <SplitText
             as="h1"
             text={project.title}
-            className="mt-6 text-4xl font-light leading-[0.98] text-ink-50 md:text-5xl"
+            className="mt-6 text-4xl font-bold leading-[0.98] text-ink-50 md:text-5xl"
           />
           <p className="mt-6 max-w-2xl text-lg text-ink-400">
-            {caseStudy?.overview || project.summary}
+            {caseStudy?.overview || project.about || project.summary}
           </p>
 
           <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-base-700/50 pt-8 md:grid-cols-4">
@@ -91,12 +98,12 @@ export default async function ProjectPage({
           </dl>
         </header>
 
-        {/* hero visual placeholder */}
+        {/* hero visual — exposed-grid slab with an outline title */}
         <Reveal>
-          <div className="mt-16 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-base-700/50 bg-gradient-to-br from-base-800 via-base-850 to-base-900">
-            <div className="flex h-full items-center justify-center">
-              <div className="h-40 w-40 rounded-full bg-gradient-to-br from-accent-500/30 to-glow-500/20 blur-2xl" />
-            </div>
+          <div className="grid-lines mt-16 flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-none border border-base-600 bg-base-850 px-6">
+            <span className="text-outline-accent text-center font-display text-5xl font-black uppercase leading-[0.9] tracking-tight md:text-8xl">
+              {project.title}
+            </span>
           </div>
         </Reveal>
 
@@ -119,7 +126,7 @@ export default async function ProjectPage({
           <Link
             href="/#contact"
             data-cursor="hover"
-            className="inline-flex rounded-full bg-accent-500 px-8 py-3.5 text-sm font-medium text-base-950 transition-colors hover:bg-accent-400"
+            className="inline-flex rounded-none bg-accent-500 px-8 py-3.5 text-sm font-medium text-base-950 transition-all hover:-translate-y-0.5 hover:shadow-brutal-ink"
           >
             Start a project like this
           </Link>
