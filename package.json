@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "World-class, CMS-driven portfolio platform",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "start": "turbo run start",
+    "db:migrate": "pnpm --filter @portfolio/db migrate",
+    "db:seed": "pnpm --filter @portfolio/db seed",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "turbo": "^2.5.0",
+    "typescript": "^5.7.3"
+  }
+}

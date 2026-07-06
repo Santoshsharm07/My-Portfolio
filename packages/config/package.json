@@ -1,0 +1,19 @@
+{
+  "name": "@portfolio/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "tsconfig.base.json",
+    "tailwind-preset.ts"
+  ],
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./tailwind-preset": "./tailwind-preset.ts"
+  },
+  "dependencies": {
+    "@portfolio/ui-tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

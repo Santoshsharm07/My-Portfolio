@@ -1,0 +1,20 @@
+{
+  "name": "@portfolio/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "tsx src/migrate.ts",
+    "seed": "tsx src/seed.ts",
+    "reset": "tsx src/migrate.ts --reset"
+  },
+  "dependencies": {
+    "@portfolio/types": "workspace:*",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

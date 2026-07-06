@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0a;
+  --ink: #ffffff;
+  --accent: #cdf25a;
+}
+
+@layer base {
+  * {
+    @apply border-base-700/60;
+  }
+
+  html {
+    @apply antialiased;
+    scroll-behavior: auto; /* Lenis owns scrolling */
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-base-900 text-ink-100 font-sans;
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-accent-500 text-base-950;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-balance;
+  }
+
+  /* Custom scrollbar — acid thumb on black */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-base-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-base-600;
+    border: 3px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-600;
+  }
+}
+
+@layer components {
+  /* Film-grain / noise overlay */
+  .grain::after {
+    content: "";
+    @apply pointer-events-none fixed inset-0 z-[100] opacity-[0.04];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container-lux {
+    @apply mx-auto w-full max-w-content px-5 md:px-8;
+  }
+
+  /* Mono kicker label with a leading acid bar */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent-500;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-br from-ink-50 via-ink-100 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  /* Acid text — solid lime fill for emphasis words */
+  .text-acid {
+    @apply text-accent-500;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-base-700/70;
+  }
+
+  /* Brutalist card — squared corners, hard border, no soft blur */
+  .card-lux {
+    @apply rounded-none border border-base-600 bg-base-850;
+  }
+
+  /* Exposed grid backdrop for brutalist sections */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  /* Full-bleed hairline that spans the section */
+  .rule {
+    @apply h-px w-full bg-base-700;
+  }
+
+  /* Oversized index numeral used as a section marker */
+  .index-numeral {
+    @apply font-mono text-sm text-accent-500;
+  }
+}
+
+@layer utilities {
+  /* Hard-offset brutalist shadow helpers */
+  .shadow-brutal {
+    box-shadow: 6px 6px 0 0 theme("colors.accent.500");
+  }
+  .shadow-brutal-ink {
+    box-shadow: 6px 6px 0 0 theme("colors.ink.50");
+  }
+
+  /* Outline text — brutalist stroked headline */
+  .text-outline {
+    -webkit-text-stroke: 1px theme("colors.ink.200");
+    color: transparent;
+  }
+  .text-outline-accent {
+    -webkit-text-stroke: 1.5px theme("colors.accent.500");
+    color: transparent;
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Custom cursor: hide native pointer on capable devices */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-none-lux,
+  .cursor-none-lux * {
+    cursor: none;
+  }
+}
