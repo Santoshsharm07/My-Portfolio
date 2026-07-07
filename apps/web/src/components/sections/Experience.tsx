@@ -10,7 +10,7 @@ export function Experience({ items }: { items: ExperienceType[] }) {
       id="experience"
       eyebrow="Experience"
       index="02 / "
-      title="Crafting Software That Learns, Adapts, And Delivers."
+      title="Engineering Intelligence Through AI & Software."
     >
       <div className="relative">
         {/* timeline spine */}
