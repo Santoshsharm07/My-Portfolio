@@ -64,7 +64,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
 
-        <h3 className="mt-4 text-2xl font-semibold leading-tight text-ink-100 transition-colors group-hover:text-accent-300">
+        <h3 className="mt-4 text-xl font-semibold leading-tight text-ink-100 transition-colors group-hover:text-accent-300">
           {project.title}
         </h3>
 
@@ -143,7 +143,7 @@ export function Projects({ projects }: { projects: Project[] }) {
       id="projects"
       eyebrow="Selected Work"
       index="03 / "
-      title="Projects built to be felt, not just seen."
+      title="From Ideas to Intelligent Products."
       intro="Real client work and personal experiments — switch between them below."
     >
       {/* Tabs */}

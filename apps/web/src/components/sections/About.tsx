@@ -18,16 +18,16 @@ export function About({ about }: { about: AboutType | null }) {
         </div>
 
         {about.stats.length > 0 && (
-          <RevealGroup className="grid grid-cols-2 gap-px overflow-hidden border border-base-600 bg-base-600">
+          <RevealGroup className="grid grid-cols-2 gap-px self-start overflow-hidden border border-base-600 bg-base-600">
             {about.stats.map((s) => (
               <RevealItem
                 key={s.label}
-                className="group bg-base-900 p-7 transition-colors hover:bg-base-850"
+                className="group flex flex-col items-center justify-center bg-base-900 px-5 py-4 transition-colors hover:bg-base-850"
               >
-                <div className="font-display text-4xl font-medium text-accent-500 md:text-5xl">
+                <div className="whitespace-nowrap font-display text-2xl font-medium text-accent-500">
                   {s.value}
                 </div>
-                <div className="mt-3 font-mono text-[11px] uppercase tracking-widest text-ink-500">
+                <div className="mt-1.5 font-mono text-[9px] uppercase tracking-widest text-ink-500">
                   {s.label}
                 </div>
               </RevealItem>

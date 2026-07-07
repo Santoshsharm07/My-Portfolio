@@ -40,46 +40,60 @@ export interface HomeContent {
  * works at build time with no running server — the previous self-fetch is what
  * caused Vercel build timeouts.
  */
-export const getHomeContent = unstable_cache(
-  async (): Promise<HomeContent> => (await readHomeContent()) as HomeContent,
-  ["home-content"],
-  {
-    tags: [
-      "home",
-      "projects",
-      "skills",
-      "experience",
-      "testimonials",
-      "freelance",
-    ],
-    revalidate: 3600,
-  },
-);
+const isDev = process.env.NODE_ENV === "development";
 
-export const getProjects = unstable_cache(
-  async (): Promise<Project[]> => (await getPublicProjects()) as Project[],
-  ["projects-list"],
-  { tags: ["projects"], revalidate: 3600 },
-);
+export const getHomeContent = isDev
+  ? async (): Promise<HomeContent> => (await readHomeContent()) as HomeContent
+  : unstable_cache(
+      async (): Promise<HomeContent> => (await readHomeContent()) as HomeContent,
+      ["home-content"],
+      {
+        tags: [
+          "home",
+          "projects",
+          "skills",
+          "experience",
+          "testimonials",
+          "freelance",
+        ],
+        revalidate: 60,
+      },
+    );
+
+export const getProjects = isDev
+  ? async (): Promise<Project[]> => (await getPublicProjects()) as Project[]
+  : unstable_cache(
+      async (): Promise<Project[]> => (await getPublicProjects()) as Project[],
+      ["projects-list"],
+      { tags: ["projects"], revalidate: 60 },
+    );
 
 export function getProject(
   slug: string,
 ): Promise<{ project: Project; caseStudy: CaseStudy | null }> {
+  const fetchFn = () =>
+    getPublicProject(slug) as Promise<{
+      project: Project;
+      caseStudy: CaseStudy | null;
+    }>;
+
+  if (isDev) return fetchFn();
+
   return unstable_cache(
-    () =>
-      getPublicProject(slug) as Promise<{
-        project: Project;
-        caseStudy: CaseStudy | null;
-      }>,
+    fetchFn,
     ["project", slug],
-    { tags: ["projects", `project:${slug}`], revalidate: 3600 },
+    { tags: ["projects", `project:${slug}`], revalidate: 60 },
   )();
 }
 
 export function getSeo(pageKey: string): Promise<SeoMeta | null> {
+  const fetchFn = () => readSeo(pageKey) as Promise<SeoMeta | null>;
+
+  if (isDev) return fetchFn().catch(() => null);
+
   return unstable_cache(
-    () => readSeo(pageKey) as Promise<SeoMeta | null>,
+    fetchFn,
     ["seo", pageKey],
-    { tags: ["seo"], revalidate: 3600 },
+    { tags: ["seo"], revalidate: 60 },
   )().catch(() => null);
 }

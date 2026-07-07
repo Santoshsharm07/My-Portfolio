@@ -12,7 +12,7 @@ import { ResumeBand } from "@/components/sections/ResumeBand";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 const EMPTY: HomeContent = {
   settings: null,

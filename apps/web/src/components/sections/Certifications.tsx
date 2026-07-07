@@ -12,7 +12,7 @@ export function Certifications({ items }: { items: Certification[] }) {
       index="05 / "
       title="Certifications & accolades."
     >
-      <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((c, i) => {
           const card =
             "card-lux group flex h-full flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-500 hover:shadow-brutal-sm";

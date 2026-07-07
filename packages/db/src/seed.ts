@@ -20,7 +20,7 @@ async function main() {
       tagline: "Software Engineer",
       email: "07santoshdevlopersharma@gmail.com",
       location: "India",
-      availability: "Available for freelance projects",
+      availability: "AI Engineer \u2022 Software Engineer \u2022 Open to Opportunities",
       socials: sql.json([
         { label: "GitHub", url: "https://github.com/Santoshsharm07" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/santosh-sharma-a57026220/" },
@@ -45,13 +45,13 @@ async function main() {
     })}`;
 
     await sql`insert into about ${sql({
-      heading: "Obsessed with the space between design and engineering.",
-      body: "I spend my days turning ambitious ideas into interfaces that feel inevitable — where a scroll becomes a story and a hover becomes a moment. Ten years across startups and studios, shipping work that has been featured on Awwwards and used by millions.\n\nMy toolkit lives at the intersection of **React**, **WebGL/Three.js**, and a deep respect for craft.",
+      heading: "Where Software Engineering Meets Artificial Intelligence",
+      body: "I'm Santosh Sharma, a **Computer Science & Engineering** graduate from **VIT Bhopal (2025)** with a CGPA of **8.60**. As an **AI Engineer** and **Software Engineer**, I am passionate about building intelligent applications and scalable software that solve real-world problems through technology and innovation.\n\nMy expertise spans **Python**, **Machine Learning**, **Generative AI**, **Agentic AI**, **Large Language Models (LLMs)**, **Data Science**, **SQL**, and **Full Stack Development**. I enjoy designing and developing end-to-end solutions, from AI-powered systems and autonomous agents to modern web applications and data-driven platforms.\n\nWith experience building **RAG applications**, **AI assistants**, **computer vision systems**, **analytics dashboards**, and **intelligent automation tools**, I focus on creating impactful products that combine cutting-edge AI with robust software engineering. I continuously explore emerging technologies to deliver solutions that are scalable, efficient, and aligned with business goals.",
       stats: sql.json([
-        { label: "Years", value: "10+" },
-        { label: "Projects shipped", value: "120+" },
-        { label: "Awwwards", value: "7" },
-        { label: "Coffee/day", value: "∞" },
+        { label: "Years", value: "0-2" },
+        { label: "Projects", value: "8+" },
+        { label: "CGPA", value: "8.60" },
+        { label: "B.Tech", value: "CSE" },
       ]),
     })}`;
 
@@ -94,71 +94,140 @@ async function main() {
 
     const projects = [
       {
-        title: "Aurora — Generative Brand System",
-        slug: "aurora",
+        title: "IB Gram",
+        slug: "ibgram",
         kind: "work",
         summary:
-          "A living identity that renders itself in real time with WebGL shaders.",
+          "An end-to-end platform connecting IB and IGCSE students with home tutors.",
         about:
-          "Built for a client rebrand: a shader-driven system that generates infinite on-brand visuals in the browser, cutting design turnaround from days to seconds.",
-        tags: ["WebGL", "Three.js", "GSAP", "Design System"],
-        role: "Design Engineer",
+          "IB Gram is a premier tutoring platform connecting IB and IGCSE students with elite home tutors. I designed and developed the entire web application from scratch, creating a seamless matching experience.",
+        tags: ["Full stack Application"],
+        role: "Full Stack Developer",
         year: 2025,
-        live_url: "https://example.com/aurora",
+        live_url: "https://www.ibgram.com/",
         repo_url: null,
         is_featured: true,
         is_published: true,
         sort_order: 0,
       },
       {
-        title: "Monolith — Product Launch",
-        slug: "monolith",
+        title: "BoardPeFocus",
+        slug: "boardpefocus",
         kind: "work",
         summary:
-          "Scroll-driven cinematic launch experience with a physics-based hero.",
+          "A premium tutor discovery engine for Class 10/12 boards in Gurgaon.",
         about:
-          "A launch microsite delivered end-to-end for a startup: staged reveal, pinned scroll scenes, and a physics hero that tripled launch-day traffic.",
-        tags: ["Next.js", "R3F", "Lenis", "Framer Motion"],
-        role: "Lead Engineer",
+          "BoardPeFocus connects Class 10 and 12 students with top-rated home tutors across CBSE, ICSE, IB, and IGCSE boards in Gurgaon. I built the tutor directory, lead generation system, and full admin dashboard.",
+        tags: ["Full stack Application"],
+        role: "Full Stack Developer",
         year: 2024,
-        live_url: "https://example.com/monolith",
+        live_url: "https://www.boardpefocus.in/",
         repo_url: null,
         is_featured: true,
         is_published: true,
         sort_order: 1,
       },
       {
-        title: "Cadence — Music Visualizer",
-        slug: "cadence",
+        title: "Road Accident Detection Alert System",
+        slug: "road-accident-detection",
         kind: "personal",
         summary:
-          "Audio-reactive 3D visuals that turn any track into a landscape.",
+          "Designed a real-time Python video processing pipeline using OpenCV for efficient and reliable road accident detection. Implemented an event-driven alert system with Twilio API for instant SMS notifications.",
         about:
-          "A weekend passion project exploring the Web Audio API and GLSL — every track becomes a living, reactive 3D landscape you can fly through.",
-        tags: ["Web Audio", "GLSL", "Three.js"],
-        role: "Creative Developer",
+          "A real-time road accident detection and alert system built with Python and OpenCV. The system processes live video feeds to detect accidents using machine learning models and instantly sends SMS alerts via the Twilio API to notify emergency contacts and authorities.",
+        tags: ["Python", "OpenCV", "Machine Learning", "Twilio API"],
+        role: "Developer",
         year: 2024,
         live_url: null,
-        repo_url: "https://github.com/",
+        repo_url: "https://github.com/Santoshsharm07/Road-Accident-Detection-Alert-System",
         is_featured: false,
         is_published: true,
         sort_order: 2,
       },
       {
-        title: "Atlas — Data Storytelling",
-        slug: "atlas",
+        title: "Imagify — AI Image Generator",
+        slug: "imagify",
         kind: "personal",
-        summary: "An interactive report that makes complex data feel human.",
+        summary:
+          "Developed a full-stack MERN application with scalable RESTful APIs for secure AI-based image generation. Executed JWT authentication, structured API routing, and integrated Gemini API for intelligent image creation.",
         about:
-          "A self-initiated experiment in data storytelling — turning a dry dataset into an interactive, scroll-driven narrative built with D3 and SVG.",
-        tags: ["D3", "SVG", "Motion"],
-        role: "Engineer",
-        year: 2023,
-        live_url: "https://example.com/atlas",
-        repo_url: null,
+          "Imagify is a full-stack AI image generation platform built with the MERN stack. It features secure user authentication via JWT, scalable RESTful APIs with Express.js, and integrates Google's Gemini API for intelligent AI-powered image generation. Styled with TailwindCSS for a modern, responsive UI.",
+        tags: ["React.js", "Node.js", "Express.js", "MongoDB", "TailwindCSS", "Gemini API", "JWT"],
+        role: "Full Stack Developer",
+        year: 2024,
+        live_url: "https://imagify-nn52-git-main-santosh-sharmas-projects-81e4a1b5.vercel.app/",
+        repo_url: "https://github.com/Santoshsharm07/Imagify",
         is_featured: false,
         is_published: true,
         sort_order: 3,
+      },
+      {
+        title: "Open Library with AI Book Suggestion",
+        slug: "open-library-ai",
+        kind: "personal",
+        summary:
+          "Built a full-stack library management platform with secure Firebase authentication and a complete book borrowing workflow. Established RESTful APIs with Node.js and Express.js, integrated Gemini API for AI-powered book suggestions, and containerized with Docker.",
+        about:
+          "A full-stack library management platform featuring secure Firebase authentication, a complete book borrowing workflow, and AI-powered book recommendations via Google's Gemini API. Built with React, Node.js, Express.js, and MongoDB, with Docker containerization for easy deployment.",
+        tags: ["React", "Node.js", "Express.js", "MongoDB", "Firebase", "Gemini API", "Docker", "JWT", "TailwindCSS"],
+        role: "Full Stack Developer",
+        year: 2024,
+        live_url: "https://open-library-with-ai-book-suggestio-blue.vercel.app/",
+        repo_url: "https://github.com/Santoshsharm07/Open-Library-with-Ai-Book-Suggestion",
+        is_featured: false,
+        is_published: true,
+        sort_order: 4,
+      },
+      {
+        title: "Legal Document Analyzer",
+        slug: "legal-document-analyzer",
+        kind: "personal",
+        summary:
+          "Designed an NLP pipeline using transformer-based models to summarize legal documents and extract named entities. Integrated OCR with text preprocessing for scanned document analysis.",
+        about:
+          "An NLP-powered legal document analyzer that uses transformer-based models from Hugging Face to summarize legal documents and extract named entities. Features OCR integration for processing scanned documents with automated text preprocessing.",
+        tags: ["Python", "NLP", "Hugging Face", "OCR"],
+        role: "Developer",
+        year: 2024,
+        live_url: null,
+        repo_url: "https://github.com/Santoshsharm07/Legal_Document_Analyzer",
+        is_featured: false,
+        is_published: true,
+        sort_order: 5,
+      },
+      {
+        title: "AI-Powered Chatbot",
+        slug: "ai-chatbot",
+        kind: "personal",
+        summary:
+          "Developed a conversational AI application using Gemini API to handle natural language user queries. Deployed the chatbot on Streamlit Cloud with prompt engineering for accurate responses.",
+        about:
+          "A conversational AI chatbot built with Python and Google's Gemini API. Features natural language understanding, prompt engineering for accurate responses, and is deployed on Streamlit Cloud for easy access.",
+        tags: ["Python", "Streamlit", "Google Gemini API"],
+        role: "Developer",
+        year: 2024,
+        live_url: null,
+        repo_url: "https://github.com/Santoshsharm07/Ai-Chatbot",
+        is_featured: false,
+        is_published: true,
+        sort_order: 6,
+      },
+      {
+        title: "Power BI Olympic Dashboard",
+        slug: "olympic-dashboard",
+        kind: "personal",
+        summary:
+          "Analyzed 120+ years of Olympic datasets using Power BI, DAX, and data modeling techniques. Delivered insights on athlete performance, medal trends, and country-wise statistics.",
+        about:
+          "A comprehensive Power BI dashboard analyzing 120+ years of Olympic data. Uses DAX formulas and advanced data modeling to deliver insights on athlete performance, medal trends, and country-wise statistics with interactive visualizations.",
+        tags: ["Power BI", "DAX", "Data Analysis"],
+        role: "Data Analyst",
+        year: 2024,
+        live_url: null,
+        repo_url: "https://github.com/Santoshsharm07/Olympic-Dashboard",
+        is_featured: false,
+        is_published: true,
+        sort_order: 7,
       },
     ];
     const projectRows: { id: string; slug: string }[] = [];
@@ -168,36 +237,103 @@ async function main() {
     }
 
     // Case studies for the two featured projects
+    // Case studies for the two featured projects
     for (const pr of projectRows.slice(0, 2)) {
+      const isIbGram = pr.slug === "ibgram";
       await sql`insert into case_studies ${sql({
         project_id: pr.id,
-        overview:
-          "A deep-dive into how we approached the problem, the constraints we embraced, and the craft that made it sing.",
-        problem:
-          "The brand needed to feel alive across every touchpoint without a rigid, static identity.",
-        solution:
-          "We built a generative system: a set of shader-driven primitives that compose into infinite, on-brand compositions.",
-        results:
-          "40% lift in engagement, featured on Awwwards, and a design language the team can extend forever.",
+        overview: isIbGram
+          ? "IB Gram connects students with verified local tutors specializing in IB and IGCSE curricula."
+          : "BoardPeFocus serves as a specialized directory matching Board Exam candidates with elite home instructors.",
+        problem: isIbGram
+          ? "Finding hyper-specific IB and IGCSE tutors in local regions is traditionally highly fragmented and offline."
+          : "Board year students (10th/12th) need high-quality offline tutor matching to succeed in critical exams.",
+        solution: isIbGram
+          ? "A custom directory website built with Next.js, featuring search by subject, radius-based tutor discovery, and booking management."
+          : "A highly-optimized directory platform highlighting tutor ratings, curriculum expertise, and verified location matching.",
+        results: isIbGram
+          ? "Streamlined search, enabling hundreds of successful connections between students and qualified tutors."
+          : "Hundreds of active student-tutor pairings in Gurgaon and highly improved lead conversion rate.",
         gallery: sql.json([]),
         sections: sql.json([
-          { type: "text", heading: "The brief", body: "Make it unforgettable." },
-          { type: "metric", heading: "Engagement", value: "+40%" },
+          {
+            type: "text",
+            heading: isIbGram ? "The Challenge" : "The Strategy",
+            body: isIbGram
+              ? "Building a trustable and fast marketplace for niche tutoring curriculums (IB and IGCSE) while maintaining clean discovery filters."
+              : "Creating a high-performance directory with clear conversion paths and search options tailored to board exams requirements."
+          }
         ]),
       })}`;
     }
 
     const skills = [
-      ["React / Next.js", "frontend", 98],
-      ["TypeScript", "frontend", 95],
-      ["Three.js / R3F", "frontend", 90],
-      ["GSAP / Motion", "frontend", 92],
-      ["GLSL / Shaders", "frontend", 80],
-      ["Node.js / Express", "backend", 85],
-      ["PostgreSQL / Supabase", "backend", 82],
-      ["Design Systems", "design", 90],
-      ["Figma", "design", 88],
-      ["Docker / CI", "devops", 75],
+      ["Python", "programming", 95],
+      ["Java", "programming", 85],
+      ["SQL", "programming", 90],
+      
+      ["Generative AI", "ai_genai", 98],
+      ["Agentic AI", "ai_genai", 98],
+      ["LLMs", "ai_genai", 95],
+      ["RAG", "ai_genai", 95],
+      ["AI Agents", "ai_genai", 98],
+      ["Multi-Agent Systems", "ai_genai", 95],
+      ["Prompt Engineering", "ai_genai", 95],
+      ["Machine Learning", "ai_genai", 90],
+      ["NLP", "ai_genai", 92],
+      ["Computer Vision", "ai_genai", 85],
+
+      ["LangChain", "frameworks", 95],
+      ["LangGraph", "frameworks", 95],
+      ["AutoGen", "frameworks", 90],
+      ["FastAPI", "frameworks", 92],
+      ["React.js", "frameworks", 90],
+      ["Next.js", "frameworks", 92],
+      ["Node.js", "frameworks", 90],
+      ["Express.js", "frameworks", 88],
+
+      ["Pandas", "data_analytics", 92],
+      ["NumPy", "data_analytics", 90],
+      ["Power BI", "data_analytics", 95],
+      ["Excel", "data_analytics", 90],
+      ["Data Visualization", "data_analytics", 92],
+      ["Predictive Analytics", "data_analytics", 88],
+      ["Statistical Analysis", "data_analytics", 85],
+      ["Data Engineering", "data_analytics", 88],
+
+      ["PostgreSQL", "databases", 90],
+      ["MySQL", "databases", 88],
+      ["MongoDB", "databases", 90],
+      ["Supabase", "databases", 92],
+
+      ["AWS Lambda", "cloud_mlops", 90],
+      ["Amazon ECS", "cloud_mlops", 85],
+      ["Amazon RDS", "cloud_mlops", 88],
+      ["Amazon Aurora", "cloud_mlops", 85],
+      ["Amazon S3", "cloud_mlops", 90],
+      ["Amazon CloudWatch", "cloud_mlops", 85],
+      ["Docker", "cloud_mlops", 90],
+      ["Git", "cloud_mlops", 95],
+      ["GitHub Actions", "cloud_mlops", 92],
+      ["CI/CD", "cloud_mlops", 90],
+
+      ["OpenAI API", "ai_apis", 98],
+      ["Google Gemini API", "ai_apis", 98],
+      ["Hugging Face", "ai_apis", 92],
+      ["Meta Graph API", "ai_apis", 90],
+      ["WhatsApp Business API", "ai_apis", 92],
+      ["REST APIs", "ai_apis", 95],
+      ["Webhooks", "ai_apis", 92],
+      ["OAuth", "ai_apis", 88],
+
+      ["AI Engineering", "domain_expertise", 98],
+      ["Agentic AI Development", "domain_expertise", 98],
+      ["Generative AI", "domain_expertise", 98],
+      ["Data Science", "domain_expertise", 90],
+      ["Software Engineering", "domain_expertise", 95],
+      ["Intelligent Automation", "domain_expertise", 95],
+      ["Backend Development", "domain_expertise", 95],
+      ["Full Stack Development", "domain_expertise", 92],
     ] as const;
     let si = 0;
     for (const [name, category, proficiency] of skills) {
@@ -211,18 +347,33 @@ async function main() {
 
     const certs = [
       {
-        title: "Awwwards Site of the Day",
-        issuer: "Awwwards",
-        issue_date: "2025-02",
-        credential_url: "https://awwwards.com/",
+        title: "SQL (Intermediate)",
+        issuer: "HackerRank",
+        issue_date: "2023-02",
+        credential_url: "https://www.hackerrank.com/certificates/b6a08d5543d3",
         sort_order: 0,
       },
       {
-        title: "Three.js Journey — Certified",
-        issuer: "Bruno Simon",
-        issue_date: "2023-09",
-        credential_url: "https://threejs-journey.com/",
+        title: "Applied Machine Learning in Python",
+        issuer: "University of Michigan",
+        issue_date: "2023-01",
+        credential_url: "https://www.coursera.org/account/accomplishments/verify/XFFWQHWJ3A3B?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
         sort_order: 1,
+      },
+      {
+        title: "The Bits and Bytes of Computer Networking",
+        issuer: "Google",
+        issue_date: "2023-12",
+        credential_url: "https://www.coursera.org/account/accomplishments/verify/V9DW2TG34N8J?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
+        sort_order: 2,
+      },
+      {
+        title: "AWS Certified Cloud Practitioner",
+        issuer: "Amazon",
+        issue_date: "2024-03",
+        credential_id: "ac2ef33b8f434561ab59d7f4dc7a2b2b",
+        credential_url: "https://www.credly.com/badges/244e38d9-3549-4a74-a5e1-a84934816980/public_url",
+        sort_order: 3,
       },
     ];
     for (const c of certs) await sql`insert into certifications ${sql(c)}`;

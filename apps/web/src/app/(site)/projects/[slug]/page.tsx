@@ -80,7 +80,7 @@ export default async function ProjectPage({
           <SplitText
             as="h1"
             text={project.title}
-            className="mt-6 text-4xl font-bold leading-[0.98] text-ink-50 md:text-5xl"
+            className="mt-6 text-2xl font-bold leading-tight text-ink-50 md:text-3xl"
           />
           <p className="mt-6 max-w-2xl text-lg text-ink-400">
             {caseStudy?.overview || project.about || project.summary}
@@ -98,14 +98,7 @@ export default async function ProjectPage({
           </dl>
         </header>
 
-        {/* hero visual — exposed-grid slab with an outline title */}
-        <Reveal>
-          <div className="grid-lines mt-16 flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-none border border-base-600 bg-base-850 px-6">
-            <span className="text-outline-accent text-center font-display text-5xl font-black uppercase leading-[0.9] tracking-tight md:text-8xl">
-              {project.title}
-            </span>
-          </div>
-        </Reveal>
+
 
         {blocks.length > 0 && (
           <div className="mx-auto mt-24 max-w-prose space-y-16">

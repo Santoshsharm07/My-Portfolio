@@ -18,6 +18,14 @@ export const skillCategory = z.enum([
   "mobile",
   "tools",
   "other",
+  "programming",
+  "ai_genai",
+  "frameworks",
+  "data_analytics",
+  "databases",
+  "cloud_mlops",
+  "ai_apis",
+  "domain_expertise",
 ]);
 export type SkillCategory = z.infer<typeof skillCategory>;
 

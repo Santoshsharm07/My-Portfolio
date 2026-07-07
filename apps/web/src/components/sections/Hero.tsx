@@ -66,13 +66,13 @@ export function Hero({
           className="eyebrow mb-6"
         >
           <span className="h-px w-8 bg-accent-500" />
-          {settings?.availability ?? "Available for select projects"}
+          {settings?.availability ?? "AI Engineer \u2022 Software Engineer \u2022 Open to Opportunities"}
         </motion.p>
 
         <SplitText
           as="h1"
           text={headline}
-          className="max-w-5xl text-4xl font-bold leading-[0.95] text-ink-50 md:text-5xl"
+          className="max-w-5xl text-5xl font-bold leading-[0.95] text-ink-50 md:text-7xl lg:text-8xl"
         />
 
         <motion.p

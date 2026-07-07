@@ -15,6 +15,21 @@ async function main() {
       await sql.unsafe(`drop schema public cascade; create schema public;`);
     }
 
+    try {
+      await sql.unsafe(`
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'programming';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'ai_genai';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'frameworks';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'data_analytics';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'databases';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'cloud_mlops';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'ai_apis';
+        ALTER TYPE skill_category ADD VALUE IF NOT EXISTS 'domain_expertise';
+      `);
+    } catch (e) {
+      // Ignored if type doesn't exist yet (will be created in init migration)
+    }
+
     await sql`
       create table if not exists _migrations (
         name text primary key,
