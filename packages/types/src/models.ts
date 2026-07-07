@@ -1,5 +1,14 @@
 import { z } from "zod";
-import { baseEntity, uuid, skillCategory } from "./common.js";
+import {
+  baseEntity,
+  uuid,
+  skillCategory,
+  optionalId,
+  optionalUrl,
+  optionalEmail,
+  optionalText,
+  optionalNumber,
+} from "./common.js";
 
 /* ─────────────────────────── Media ─────────────────────────── */
 export const media = baseEntity.extend({
@@ -23,7 +32,7 @@ export const socialLink = z.object({
 export const siteSettings = baseEntity.extend({
   brand_name: z.string().min(1),
   tagline: z.string().default(""),
-  email: z.string().email().nullable(),
+  email: optionalEmail,
   location: z.string().default(""),
   availability: z.string().default(""),
   socials: z.array(socialLink).default([]),
@@ -41,9 +50,9 @@ export const hero = baseEntity.extend({
   roles: z.array(z.string()).default([]), // typewriter rotation
   cta_label: z.string().default("View work"),
   cta_href: z.string().default("#projects"),
-  secondary_cta_label: z.string().nullable(),
-  secondary_cta_href: z.string().nullable(),
-  background_media_id: uuid.nullable(),
+  secondary_cta_label: optionalText,
+  secondary_cta_href: optionalText,
+  background_media_id: optionalId,
 });
 export const heroUpdate = hero
   .omit({ id: true, created_at: true, updated_at: true })
@@ -55,7 +64,7 @@ export const aboutStat = z.object({ label: z.string(), value: z.string() });
 export const about = baseEntity.extend({
   heading: z.string().min(1),
   body: z.string().default(""), // markdown
-  portrait_media_id: uuid.nullable(),
+  portrait_media_id: optionalId,
   stats: z.array(aboutStat).default([]),
 });
 export const aboutUpdate = about
@@ -69,10 +78,10 @@ export const experience = baseEntity.extend({
   role: z.string().min(1),
   location: z.string().default(""),
   start_date: z.string(), // YYYY-MM
-  end_date: z.string().nullable(),
+  end_date: optionalText,
   is_current: z.boolean().default(false),
   description: z.string().default(""),
-  logo_media_id: uuid.nullable(),
+  logo_media_id: optionalId,
   sort_order: z.number().int().default(0),
 });
 export const experienceCreate = experience.omit({
@@ -93,12 +102,12 @@ export const project = baseEntity.extend({
   summary: z.string().default(""),
   about: z.string().default(""), // longer "short about" shown on the detail page
   kind: z.enum(["personal", "work"]).default("personal"),
-  cover_media_id: uuid.nullable(),
+  cover_media_id: optionalId,
   tags: z.array(z.string()).default([]),
   role: z.string().default(""),
-  year: z.number().int().nullable(),
-  live_url: z.string().url().nullable(),
-  repo_url: z.string().url().nullable(),
+  year: optionalNumber,
+  live_url: optionalUrl,
+  repo_url: optionalUrl,
   is_featured: z.boolean().default(false),
   is_published: z.boolean().default(false),
   sort_order: z.number().int().default(0),
@@ -140,7 +149,7 @@ export const skill = baseEntity.extend({
   name: z.string().min(1),
   category: skillCategory,
   proficiency: z.number().int().min(0).max(100).default(80),
-  icon_media_id: uuid.nullable(),
+  icon_media_id: optionalId,
   sort_order: z.number().int().default(0),
 });
 export const skillCreate = skill.omit({
@@ -155,10 +164,10 @@ export type Skill = z.infer<typeof skill>;
 export const certification = baseEntity.extend({
   title: z.string().min(1),
   issuer: z.string().min(1),
-  issue_date: z.string().nullable(), // YYYY-MM
-  credential_id: z.string().nullable(),
-  credential_url: z.string().url().nullable(),
-  file_media_id: uuid.nullable(),
+  issue_date: optionalText, // YYYY-MM
+  credential_id: optionalText,
+  credential_url: optionalUrl,
+  file_media_id: optionalId,
   sort_order: z.number().int().default(0),
 });
 export const certificationCreate = certification.omit({
@@ -172,7 +181,7 @@ export type Certification = z.infer<typeof certification>;
 /* ───────────────────────── Resume ──────────────────────────── */
 export const resume = baseEntity.extend({
   label: z.string().default("Resume"),
-  file_media_id: uuid.nullable(),
+  file_media_id: optionalId,
   version: z.string().default("1"),
   is_active: z.boolean().default(false),
 });
@@ -189,7 +198,7 @@ export const testimonial = baseEntity.extend({
   author_name: z.string().min(1),
   author_role: z.string().default(""),
   author_company: z.string().default(""),
-  avatar_media_id: uuid.nullable(),
+  avatar_media_id: optionalId,
   quote: z.string().min(1),
   rating: z.number().int().min(1).max(5).default(5),
   sort_order: z.number().int().default(0),
@@ -212,7 +221,7 @@ export const freelanceService = baseEntity.extend({
   features: z.array(z.string()).default([]),
   icon: z.string().default(""), // emoji or short glyph
   cta_label: z.string().default("Start this project"),
-  contact_url: z.string().nullable(), // mailto:, wa.me, tel:, or #contact
+  contact_url: optionalText, // mailto:, wa.me, tel:, or #contact
   is_published: z.boolean().default(true),
   sort_order: z.number().int().default(0),
 });
@@ -250,9 +259,9 @@ export const seoMeta = baseEntity.extend({
   title: z.string().default(""),
   description: z.string().default(""),
   keywords: z.array(z.string()).default([]),
-  og_image_media_id: uuid.nullable(),
-  canonical: z.string().url().nullable(),
-  json_ld: z.record(z.unknown()).nullable(),
+  og_image_media_id: optionalId,
+  canonical: optionalUrl,
+  json_ld: z.record(z.unknown()).nullish(),
 });
 export const seoMetaUpsert = seoMeta.omit({
   id: true,

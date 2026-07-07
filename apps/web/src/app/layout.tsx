@@ -6,13 +6,13 @@ import { getSeo } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeo("home").catch(() => null);
-  const title = seo?.title ?? "Portfolio — Design Engineer";
+  const title = seo?.title ?? "Santosh - Portfolio";
   const description =
     seo?.description ??
     "A world-class portfolio crafted with React, Three.js, and motion.";
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: title, template: "%s — Portfolio" },
+    title: { default: title, template: "%s — Santosh - Portfolio" },
     description,
     keywords: seo?.keywords,
     openGraph: {

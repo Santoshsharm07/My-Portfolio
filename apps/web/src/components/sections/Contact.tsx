@@ -56,7 +56,7 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
             <a
               href={`mailto:${settings.email}`}
               data-cursor="hover"
-              className="inline-block font-display text-2xl text-ink-50 underline-offset-8 transition-colors hover:text-accent-500 hover:underline md:text-3xl"
+              className="inline-block whitespace-nowrap font-display text-sm text-ink-50 underline-offset-8 transition-colors hover:text-accent-500 hover:underline md:text-lg"
             >
               {settings.email}
             </a>

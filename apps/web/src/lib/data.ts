@@ -1,4 +1,10 @@
-import { apiFetch } from "./api";
+import { unstable_cache } from "next/cache";
+import {
+  getHomeContent as readHomeContent,
+  getPublicProjects,
+  getPublicProject,
+  getSeo as readSeo,
+} from "@/server/content";
 import type {
   SiteSettings,
   Hero,
@@ -27,9 +33,17 @@ export interface HomeContent {
   resume: Resume | null;
 }
 
-/** All content for the one-page site, cached and tag-revalidated. */
-export function getHomeContent(): Promise<HomeContent> {
-  return apiFetch<HomeContent>("/content/home", {
+/**
+ * Public reads talk to Supabase directly from the server and are wrapped in
+ * `unstable_cache` for ISR + tag-based revalidation. Reading the DB directly
+ * (instead of the app fetching its own HTTP route) means static generation
+ * works at build time with no running server — the previous self-fetch is what
+ * caused Vercel build timeouts.
+ */
+export const getHomeContent = unstable_cache(
+  async (): Promise<HomeContent> => (await readHomeContent()) as HomeContent,
+  ["home-content"],
+  {
     tags: [
       "home",
       "projects",
@@ -39,25 +53,33 @@ export function getHomeContent(): Promise<HomeContent> {
       "freelance",
     ],
     revalidate: 3600,
-  });
-}
+  },
+);
 
-export function getProjects(): Promise<Project[]> {
-  return apiFetch<Project[]>("/projects", { tags: ["projects"], revalidate: 3600 });
-}
+export const getProjects = unstable_cache(
+  async (): Promise<Project[]> => (await getPublicProjects()) as Project[],
+  ["projects-list"],
+  { tags: ["projects"], revalidate: 3600 },
+);
 
 export function getProject(
   slug: string,
 ): Promise<{ project: Project; caseStudy: CaseStudy | null }> {
-  return apiFetch(`/projects/${slug}`, {
-    tags: ["projects", `project:${slug}`],
-    revalidate: 3600,
-  });
+  return unstable_cache(
+    () =>
+      getPublicProject(slug) as Promise<{
+        project: Project;
+        caseStudy: CaseStudy | null;
+      }>,
+    ["project", slug],
+    { tags: ["projects", `project:${slug}`], revalidate: 3600 },
+  )();
 }
 
 export function getSeo(pageKey: string): Promise<SeoMeta | null> {
-  return apiFetch<SeoMeta | null>(`/seo/${pageKey}`, {
-    tags: ["seo"],
-    revalidate: 3600,
-  }).catch(() => null);
+  return unstable_cache(
+    () => readSeo(pageKey) as Promise<SeoMeta | null>,
+    ["seo", pageKey],
+    { tags: ["seo"], revalidate: 3600 },
+  )().catch(() => null);
 }

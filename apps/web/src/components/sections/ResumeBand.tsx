@@ -9,10 +9,10 @@ export function ResumeBand({ resume }: { resume: Resume | null }) {
   const href = resume?.file_media_id ? "/resume" : "#contact";
 
   return (
-    <section id="resume" className="relative py-24">
+    <section id="resume" className="relative py-16">
       <div className="container-lux">
         <Reveal>
-          <div className="relative flex flex-col items-start justify-between gap-8 overflow-hidden bg-accent-500 p-10 text-base-950 md:flex-row md:items-center md:p-14">
+          <div className="relative flex flex-col items-center justify-between gap-8 overflow-hidden bg-accent-500 p-10 text-base-950 md:flex-row md:items-center md:p-14">
             {/* faint gridlines over the lime */}
             <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] [background-size:40px_40px]" />
             <div className="relative">

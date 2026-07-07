@@ -43,3 +43,35 @@ export function paginated<T extends z.ZodTypeAny>(item: T) {
 /** Helper: build create/update schemas from a full-row schema. */
 export const optionalNullable = <T extends z.ZodTypeAny>(s: T) =>
   s.nullish();
+
+/**
+ * Field helpers for admin-editable optional columns. Admin forms omit blank
+ * fields (key absent) or send empty strings; the DB stores NULL. These accept
+ * `undefined` / `""` and normalise both to `null` so create/update never fails
+ * validation on an untouched optional field.
+ */
+const blankToNull = (v: unknown) => (v === "" || v === undefined ? null : v);
+
+/** Optional foreign-key id (media references, etc.). */
+export const optionalId = z.preprocess(blankToNull, uuid.nullable());
+
+/** Optional URL — normalises "" / missing to null, else must be a valid URL. */
+export const optionalUrl = z.preprocess(
+  blankToNull,
+  z.string().url().nullable(),
+);
+
+/** Optional email — normalises "" / missing to null, else must be valid. */
+export const optionalEmail = z.preprocess(
+  blankToNull,
+  z.string().email().nullable(),
+);
+
+/** Optional free-text (dates, ids) — "" / missing → null, else a string. */
+export const optionalText = z.preprocess(blankToNull, z.string().nullable());
+
+/** Optional integer — "" / missing → null, else an int. */
+export const optionalNumber = z.preprocess(
+  blankToNull,
+  z.number().int().nullable(),
+);

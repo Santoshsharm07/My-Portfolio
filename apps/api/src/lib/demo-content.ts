@@ -360,7 +360,7 @@ const demoSeoMap: Record<string, SeoMeta> = {
   home: {
     ...base("seo1"),
     page_key: "home",
-    title: "Aria Vale — Design Engineer & Creative Technologist",
+    title: "Santosh - Portfolio",
     description:
       "Award-winning design engineer crafting cinematic, interactive web experiences with React, Three.js, and motion.",
     keywords: ["design engineer", "creative developer", "webgl", "three.js"],
