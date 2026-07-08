@@ -6,7 +6,13 @@ import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { API_URL } from "@/lib/env";
 
+import emailjs from "@emailjs/browser";
+
 type Status = "idle" | "sending" | "sent" | "error";
+
+const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_anjwxdx";
+const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_izhvyrs";
+const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "HeCXZiu-R2XzqOURM";
 
 export function Contact({ settings }: { settings: SiteSettings | null }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -16,6 +22,7 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
     e.preventDefault();
     setStatus("sending");
     setError("");
+    console.log("EmailJS Credentials runtime:", { serviceId, templateId, publicKey });
     const form = new FormData(e.currentTarget);
     const payload = {
       name: String(form.get("name") ?? ""),
@@ -24,18 +31,39 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
       message: String(form.get("message") ?? ""),
       company: String(form.get("company") ?? ""), // honeypot
     };
+
+    if (payload.company) {
+      // Honeypot field filled by spam bot
+      setStatus("sent");
+      return;
+    }
+
     try {
-      const res = await fetch(`${API_URL}/messages`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error((await res.json())?.error?.message ?? "Failed");
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("Email service configuration is missing in environment variables.");
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: payload.name,
+          name: payload.name,
+          from_email: payload.email,
+          email: payload.email,
+          subject: payload.subject,
+          message: payload.message,
+        },
+        publicKey
+      );
+
       setStatus("sent");
       (e.target as HTMLFormElement).reset();
-    } catch (err) {
+    } catch (err: any) {
+      console.error("EmailJS Error details:", err);
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      const msg = err?.text || err?.message || (typeof err === "string" ? err : "Something went wrong");
+      setError(msg);
     }
   }
 
