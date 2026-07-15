@@ -7,8 +7,8 @@ import type { Hero as HeroType, SiteSettings } from "@portfolio/types";
 import { SplitText } from "@/components/motion/SplitText";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
-const HeroScene = dynamic(
-  () => import("@/components/three/HeroScene").then((m) => m.HeroScene),
+const AvatarHero = dynamic(
+  () => import("@/components/three/AvatarHero").then((m) => m.AvatarHero),
   { ssr: false },
 );
 
@@ -53,7 +53,7 @@ export function Hero({
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden pt-16"
     >
-      <HeroScene />
+      <AvatarHero />
 
       {/* vignette */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(8,8,10,0.85)_100%)]" />
