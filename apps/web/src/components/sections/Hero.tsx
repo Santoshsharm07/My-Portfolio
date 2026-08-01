@@ -59,6 +59,7 @@ export function Hero({
   const rolesRef = useRef<HTMLDivElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorMobileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -67,7 +68,7 @@ export function Hero({
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
     // Initial states to prevent flash of unstyled content
-    gsap.set([eyebrowRef.current, titleRef.current, subtitleRef.current, rolesRef.current, ctasRef.current, scrollIndicatorRef.current], {
+    gsap.set([eyebrowRef.current, titleRef.current, subtitleRef.current, rolesRef.current, ctasRef.current, scrollIndicatorRef.current, scrollIndicatorMobileRef.current], {
       opacity: 0,
       y: 30,
     });
@@ -87,7 +88,7 @@ export function Hero({
       .to(subtitleRef.current, { opacity: 1, y: 0, duration: 1.0 }, 0.7)
       .to(rolesRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.8)
       .to(ctasRef.current, { opacity: 1, y: 0, duration: 1.0 }, 0.9)
-      .to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 1.0 }, 1.15);
+      .to([scrollIndicatorRef.current, scrollIndicatorMobileRef.current], { opacity: 1, y: 0, duration: 1.0 }, 1.15);
 
     // 2. Scroll-Triggered Parallax and Scale Down (Apple/Tesla Landing Page Feel)
     if (containerRef.current) {
@@ -161,7 +162,7 @@ export function Hero({
     <section
       ref={containerRef}
       id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-16 bg-[#08080a]"
+      className="relative flex min-h-[92svh] items-center overflow-hidden pt-16 bg-[#08080a] sm:min-h-[100svh]"
     >
       {/* Interactive 3D Model background centerpiece (clickable avatar) */}
       <div ref={canvasContainerRef} className="absolute inset-0 z-0 w-full h-full">
@@ -211,12 +212,12 @@ export function Hero({
           {/* CTA Buttons */}
           <div
             ref={ctasRef}
-            className="mt-12 flex flex-wrap items-center gap-4"
+            className="mt-8 flex items-center gap-3 sm:mt-12 sm:gap-4"
           >
             <MagneticButton
               as="a"
               href={hero?.cta_href ?? "#projects"}
-              className="bg-accent-500 text-base-950 font-bold px-8 py-4 rounded-full transition-all duration-300 hover:bg-accent-400 hover:scale-105"
+              className="bg-accent-500 text-base-950 font-bold px-5 py-3 text-sm sm:px-8 sm:py-4 sm:text-base whitespace-nowrap rounded-full transition-all duration-300 hover:bg-accent-400 hover:scale-105"
             >
               {hero?.cta_label ?? "Explore Systems"}
             </MagneticButton>
@@ -224,19 +225,30 @@ export function Hero({
               <MagneticButton
                 as="a"
                 href={hero.secondary_cta_href ?? "#about"}
-                className="border border-base-600/80 text-ink-100 font-semibold px-8 py-4 rounded-full hover:border-accent-500/70 hover:bg-accent-500/5 transition-all duration-300"
+                className="border border-base-600/80 text-ink-100 font-semibold px-5 py-3 text-sm sm:px-8 sm:py-4 sm:text-base whitespace-nowrap rounded-full hover:border-accent-500/70 hover:bg-accent-500/5 transition-all duration-300"
               >
                 {hero.secondary_cta_label}
               </MagneticButton>
             )}
           </div>
+
+          {/* Scroll indicator, mobile: in-flow right under the CTAs */}
+          <div
+            ref={scrollIndicatorMobileRef}
+            className="mt-10 flex justify-center pointer-events-none sm:hidden"
+          >
+            <span className="flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500">
+              Scroll Down
+              <span className="h-8 w-px animate-pulse bg-gradient-to-b from-accent-500 to-transparent" />
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Floating Scroll Indicator */}
+      {/* Scroll indicator, desktop: floating at the section bottom */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute inset-x-0 bottom-8 flex justify-center z-20 pointer-events-none"
+        className="absolute inset-x-0 bottom-6 hidden justify-center z-20 pointer-events-none sm:flex"
       >
         <span className="flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500">
           Scroll Down

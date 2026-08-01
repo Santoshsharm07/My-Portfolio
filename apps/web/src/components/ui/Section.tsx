@@ -25,11 +25,11 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("relative scroll-mt-24 py-24 md:py-36", className)}
+      className={cn("relative scroll-mt-24 pt-8 pb-16 md:py-36", className)}
     >
       <div className="container-lux">
         {(eyebrow || title) && (
-          <header className="mb-14 border-t border-base-600 pt-6">
+          <header className="mb-8 border-t border-base-600 pt-6 md:mb-14">
             {eyebrow && (
               <Reveal>
                 <div className="flex items-center justify-between gap-4">
